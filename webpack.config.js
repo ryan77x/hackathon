@@ -1,6 +1,16 @@
 const path = require('path');
+//var nodeExternals = require('webpack-node-externals');
 
 module.exports = {
+  target: 'web',
+
+  //externals: [nodeExternals()],
+  // externals: {
+  //   fs: require('fs'),
+  //   net: require('net'),
+  //   tls: require('tls'),
+  // },
+  
   context: path.join(__dirname, '/src'),
 
   entry: {

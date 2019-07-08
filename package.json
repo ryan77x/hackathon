@@ -26,19 +26,21 @@
     "babel-preset-react": "^6.24.1",
     "babel-register": "^6.4.3",
     "express": "^4.17.1",
-    "json-loader": "^0.5.4",
-    "lodash": "^4.17.10",
-    "lodash-webpack-plugin": "^0.10.2",
     "file-loader": "^0.11.2",
+    "json-loader": "^0.5.4",
     "less": "^3.8.1",
     "less-plugin-autoprefix": "^1.5.1",
+    "lodash": "^4.17.10",
+    "lodash-webpack-plugin": "^0.10.2",
     "morgan": "^1.9.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "webpack": "^4.35.2",
-    "serve-favicon": "^2.5.0"
+    "serve-favicon": "^2.5.0",
+    "unirest": "^0.6.0",
+    "webpack": "^4.35.2"
   },
   "devDependencies": {
-    "webpack-cli": "^3.3.5"
+    "webpack-cli": "^3.3.5",
+    "webpack-node-externals": "^1.7.2"
   }
 }
