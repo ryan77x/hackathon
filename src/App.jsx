@@ -8,18 +8,15 @@ class App extends Component{
         super();
         this.state = {
             countryName: null,
-            country: [],
-            countries: [],
-            stockPrice: [],
+            countryData: [],
+            picOfDayData: {},
             cityName: null,
-            weather: [],
+            weatherData: [],
             displayOption: null
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleAllCountriesClick = this.handleAllCountriesClick.bind(this);
         this.handleCountryInfoClick = this.handleCountryInfoClick.bind(this);
-        this.handleStockInfoClick = this.handleStockInfoClick.bind(this);
         this.handleWeatherInfoClick = this.handleWeatherInfoClick.bind(this);
     }
 
@@ -52,7 +49,7 @@ class App extends Component{
         axios(config)
         .then((res => this.setState(
           {
-            country: res.data[0],
+            countryData: res.data[0],
             displayOption: displayOptions.COUNTRY
           }  
         )));
@@ -77,34 +74,38 @@ class App extends Component{
 
             this.setState(
             {
-                weather: data,
+                weatherData: data,
                 displayOption: displayOptions.WEATHER
             }  
             );
         });
     }
-
-    handleStockInfoClick(event){
+ 
+    componentDidMount(){
         const config = {
             method: 'get',
-            url: 'https://myallies-breaking-news-v1.p.rapidapi.com/GetCompanyDetailsBySymbol?symbol=twtr',
-            headers: { 
-                'X-RapidAPI-Host': 'myallies-breaking-news-v1.p.rapidapi.com',
-                'X-RapidAPI-Key': '37d1b8beffmsh185156cb29e8172p139f14jsn87a5bed0c0d2'
-            }
+            url: 'https://api.nasa.gov/planetary/apod?api_key=HP1lr8fnPFNwZflvq5WzERHCFAMqTfTGNDpapjzt',
         }
 
         axios(config)
-        .then((res => this.setState(
-          {
-            stockPrice: res.data,
-            displayOption: displayOptions.STOCK_PRICE
-          }  
-        )));
-    }
- 
-    componentDidMount(){
+        .then((res) => {
+            let data = res.data;
+            let displayOption = null;
 
+            if (data.media_type === "video"){
+                displayOption = displayOptions.VIDEO;
+            }
+            else{
+                displayOption = displayOptions.PICTURE;
+            }
+
+            this.setState(
+            {
+                picOfDayData: data,
+                displayOption: displayOption
+            }  
+            );
+        });
     }
 
     render() {
@@ -164,17 +165,10 @@ class App extends Component{
             
             <View 
                 displayOption={this.state.displayOption}
-                country={this.state.country} 
-                countries={this.state.countries}
-                weather={this.state.weather}
-                stockPrice={this.state.stockPrice}
+                countryData={this.state.countryData} 
+                weatherData={this.state.weatherData}
+                picOfDayData={this.state.picOfDayData}
             />
-
-            <div>
-                <p id="picOfDayText">Picture of day</p>
-                <img src="image/wave.jpg" alt="Default pic" className="rounded" id="picOfDay"/>
-            </div>
-
           </div>
         );
     }
