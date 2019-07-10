@@ -4,8 +4,9 @@
   "description": "",
   "main": "server/index.js",
   "scripts": {
-    "build": "webpack --mode development",
+    "build": "npm run less && webpack",
     "start": "node server/index.js",
+    "less": "lessc src/css/style.less dist/css/style.css",
     "test": "npm run build && mocha test/.setup.js test/*.spec.js --exit"
   },
   "repository": {
@@ -25,6 +26,7 @@
     "babel-preset-airbnb": "^1.0.1",
     "babel-preset-react": "^6.24.1",
     "babel-register": "^6.4.3",
+    "copy-webpack-plugin": "^5.0.3",
     "express": "^4.17.1",
     "file-loader": "^0.11.2",
     "json-loader": "^0.5.4",

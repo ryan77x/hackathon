@@ -84,7 +84,9 @@ class View extends React.Component {
         </div>
     }
     else{
-      view = <div></div>
+      view = 
+        <div> 
+        </div>
     }
     return (
       <div><br/>

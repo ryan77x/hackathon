@@ -1,17 +1,16 @@
 const path = require('path');
-//var nodeExternals = require('webpack-node-externals');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   target: 'web',
 
-  //externals: [nodeExternals()],
-  // externals: {
-  //   fs: require('fs'),
-  //   net: require('net'),
-  //   tls: require('tls'),
-  // },
-  
   context: path.join(__dirname, '/src'),
+
+  plugins: [
+    new CopyPlugin([
+      { from: 'image', to: 'image' },
+    ]),
+  ],
 
   entry: {
     javascript: './index'

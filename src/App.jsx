@@ -114,14 +114,14 @@ class App extends Component{
 
         return (
           <div className='container'>
-            <h1 className="text-white">Country Info</h1>
+            <h1 className="text-white">React and web API demo</h1>
             <hr style={hrStyle}/>
             
             <div className="row">
                 <div className="col-sm-6" >
                     <div className="card">
                         <div className="card-header">
-                            <p>Get temperature of a city<br/>Example: "san diego, us"</p>
+                            <p>Get basic weather info</p>
                         </div>
                         <div className="card-body">
                         <div>
@@ -142,7 +142,7 @@ class App extends Component{
                 <div className="col-sm-6" >
                     <div className="card">
                         <div className="card-header">
-                            <p>Get basic country info<br/>Example: "mexico"</p>
+                            <p>Get basic country info</p>
                         </div>
                         <div className="card-body">
                         <div>
@@ -169,6 +169,12 @@ class App extends Component{
                 weather={this.state.weather}
                 stockPrice={this.state.stockPrice}
             />
+
+            <div>
+                <p id="picOfDayText">Picture of day</p>
+                <img src="image/wave.jpg" alt="Default pic" className="rounded" id="picOfDay"/>
+            </div>
+
           </div>
         );
     }
