@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import View from './View'
-import UserIput from './UserInput'
 import displayOptions from './DisplayOptions'
 
 const rapid_API_key = '37d1b8beffmsh185156cb29e8172p139f14jsn87a5bed0c0d2';
@@ -20,15 +19,37 @@ class App extends Component{
     constructor(){
         super();
         this.state = {
+            countryName: '',
             countryData: [],
             picOfDayData: {},
+            cityName: '',
             weatherData: [],
             displayOption: null
         }
+
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleCountryInfoClick = this.handleCountryInfoClick.bind(this);
+        this.handleWeatherInfoClick = this.handleWeatherInfoClick.bind(this);
     }
 
-    getCountryData(name){
-        let countryName = name.trim();
+    handleInputChange(event){
+        const target = event.target;
+        const name = target.name;
+        const value = target.value;
+
+        this.setState({
+            [name]: value
+        });
+    }
+
+    handleAllCountriesClick(){
+        this.setState({
+            displayOption: displayOptions.COUNTRIES
+        });
+    }
+
+    handleCountryInfoClick(event){
+        let countryName = this.state.countryName.trim();
 
         if (countryName === ''){
             console.log("User input is empty space");
@@ -56,8 +77,8 @@ class App extends Component{
         }
     }
 
-    getWeatherData(name){
-        let cityName = name.trim();
+    handleWeatherInfoClick(event){
+        let cityName = this.state.cityName.trim();
 
         if (cityName === ''){
             console.log("User input is empty space");
@@ -139,10 +160,50 @@ class App extends Component{
             <h1 className="text-white">React and web API (Hackathon)</h1>
             <hr style={hrStyle}/>
             
-            <UserIput 
-                onGetCountryData={(name) => this.getCountryData(name)}
-                onGetWeatherData={(name) => this.getWeatherData(name)}
-            />
+            <div className="row">
+                <div className="col-sm-6" >
+                    <div className="card">
+                        <div className="card-header">
+                            <p>Get basic weather info</p>
+                        </div>
+                        <div className="card-body">
+                        <div>
+                            <label><strong>City Name</strong></label>
+                            <input className="form-control" id="cityName"
+                            name="cityName" 
+                            type="text" 
+                            value={this.state.cityName}
+                            onChange={this.handleInputChange}
+                            />
+                        </div>
+                        </div>
+                        <div className="card-footer">
+                        <button className="btn btn-primary" name="cityTemperatureButton" onClick={this.handleWeatherInfoClick}>City Temperature</button>
+                        </div>
+                    </div>
+                </div>
+                <div className="col-sm-6" >
+                    <div className="card">
+                        <div className="card-header">
+                            <p>Get basic country info</p>
+                        </div>
+                        <div className="card-body">
+                        <div>
+                            <label><strong>Country Name</strong></label>
+                            <input className="form-control" id="countryName"
+                            name="countryName" 
+                            type="text" 
+                            value={this.state.countryName}
+                            onChange={this.handleInputChange}
+                            />
+                        </div>
+                        </div>
+                        <div className="card-footer">
+                        <button className="btn btn-primary" name="countryInfoButton" onClick={this.handleCountryInfoClick}>Country Info</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             
             <View 
                 displayOption={this.state.displayOption}
