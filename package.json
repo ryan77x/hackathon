@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "server/index.js",
+  "engines": {
+    "node": "10.x.x",
+    "npm": "6.x.x"
+  },
   "scripts": {
     "build": "npm run less && webpack",
     "start": "npm run build && node server/index.js",
@@ -42,6 +46,7 @@
     "webpack": "^4.35.2"
   },
   "devDependencies": {
+    "case-sensitive-paths-webpack-plugin": "^2.2.0",
     "webpack-cli": "^3.3.5",
     "webpack-node-externals": "^1.7.2"
   }

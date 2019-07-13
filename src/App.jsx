@@ -106,7 +106,7 @@ class App extends Component{
             if (data.media_type === "video"){
                 displayOption = displayOptions.VIDEO;
             }
-            else{
+            else if (data.media_type === "image"){
                 displayOption = displayOptions.PICTURE;
             }
 

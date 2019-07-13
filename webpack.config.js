@@ -1,5 +1,6 @@
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
+var CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 
 module.exports = {
   target: 'web',
@@ -10,6 +11,7 @@ module.exports = {
     new CopyPlugin([
       { from: 'image', to: 'image' },
     ]),
+    new CaseSensitivePathsPlugin(),
   ],
 
   entry: {
