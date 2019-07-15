@@ -14,7 +14,7 @@ const API_weather_host = 'community-open-weather-map.p.rapidapi.com';
 
 const nasa_API_key = 'HP1lr8fnPFNwZflvq5WzERHCFAMqTfTGNDpapjzt';
 const API_picOfDay_URL = 'https://api.nasa.gov/planetary/apod?api_key=';
-const default_picOfDay_data = { url: 'image/wave.jpg' };
+const default_picOfDay_data = { url: 'image/wave.jpg', explanation: '' };
 
 class App extends Component{
     constructor(){
