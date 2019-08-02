@@ -4,16 +4,6 @@ import View from './View'
 import UserIput from './UserInput'
 import displayOptions from './DisplayOptions'
 
-const rapid_API_key = '37d1b8beffmsh185156cb29e8172p139f14jsn87a5bed0c0d2';
-
-const API_country_URL = 'https://restcountries-v1.p.rapidapi.com/name/';
-const API_country_host = 'restcountries-v1.p.rapidapi.com';
-
-const API_weather_URL = 'https://community-open-weather-map.p.rapidapi.com/weather?callback=test&id=2172797&units=%22metric%22+or+%22imperial%22&mode=xml%2C+html&q=';
-const API_weather_host = 'community-open-weather-map.p.rapidapi.com';
-
-const nasa_API_key = 'HP1lr8fnPFNwZflvq5WzERHCFAMqTfTGNDpapjzt';
-const API_picOfDay_URL = 'https://api.nasa.gov/planetary/apod?api_key=';
 const default_picOfDay_data = { url: 'image/wave.jpg', explanation: '' };
 
 class App extends Component{
@@ -34,19 +24,13 @@ class App extends Component{
             console.log("User input is empty space");
         }
         else{
-            const config = {
-                method: 'get',
-                url: API_country_URL + countryName,
-                headers: { 
-                    'X-RapidAPI-Host': API_country_host,
-                    'X-RapidAPI-Key': rapid_API_key
-                }
-            }
+            let url = '/api/country_data/?q=' + countryName;
 
-            axios(config)
+            axios
+            .get(url)
             .then((res => this.setState(
             {
-                countryData: res.data[0],
+                countryData: res.data,
                 displayOption: displayOptions.COUNTRY
             }  
             )))
@@ -63,21 +47,12 @@ class App extends Component{
             console.log("User input is empty space");
         }
         else{
-            const config = {
-                method: 'get',
-                url: API_weather_URL + cityName,
-                headers: { 
-                    'X-RapidAPI-Host': API_weather_host,
-                    'X-RapidAPI-Key': rapid_API_key
-                }
-            }
+            let url = '/api/weather_data/?q=' + cityName;
 
-            axios(config)
+            axios
+            .get(url)
             .then((res) => {
-                //response data from this particular API service needs to be modified before parsing to object
-                let data = res.data.replace('test({', '{');
-                data = data.replace('})', '}');
-                data = JSON.parse(data);
+                let data = JSON.parse(res.data);
 
                 this.setState(
                 {
@@ -88,17 +63,15 @@ class App extends Component{
             })
             .catch(error => {
                 console.log(error);
-            });
+            });           
         }
     }
  
     componentDidMount(){
-        const config = {
-            method: 'get',
-            url: API_picOfDay_URL + nasa_API_key
-        }
+        let url = '/api/pic_data';
 
-        axios(config)
+        axios
+        .get(url)
         .then((res) => {
             let data = res.data;
             let displayOption = null;
